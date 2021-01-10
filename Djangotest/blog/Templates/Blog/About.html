@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<head>
+    {% if title %}
+        <meta charset="UTF-8">
+        <title>Django Blog - {{ title }} </title>
+    {% else %}
+        <title>Title</title>
+    {% endif %}
+</head>
+<body>
+    <h1>About Page</h1>
+</body>
+{% endblock content %}
