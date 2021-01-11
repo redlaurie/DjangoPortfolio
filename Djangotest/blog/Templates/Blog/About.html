@@ -1,14 +1,25 @@
 {% extends "blog/base.html" %}
 {% block content %}
-<head>
-    {% if title %}
-        <meta charset="UTF-8">
-        <title>Django Blog - {{ title }} </title>
-    {% else %}
-        <title>Title</title>
-    {% endif %}
-</head>
-<body>
-    <h1>About Page</h1>
-</body>
+<div class="about-section">
+  <h1>About Us Page</h1>
+  <p>We Program and develop a variety of apps using python,HTML and CSS</p>
+  <p>Resize the browser window to see that this page is responsive by the way.</p>
+</div>
+
+<h2 style="text-align:center">Laurie</h2>
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="#" alt="Laurie" style="width:100%">
+      <div class="container">
+        <h2>Laurie Humphries-Cable</h2>
+        <p class="title">Portfolio owner</p>
+        <p>I am self-motivating and very hardworking, working equally well in a team or as an individual. I am a fast learner and have a unique
+            "can do" attitude to problems and challenges as they arise.
+            I take great pleasure in developing new skills and adapt quickly to new circumstance.</p>
+        <p>red-laurie@hotmail.co.uk</p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
