@@ -9,7 +9,7 @@ from .models import Post,postImages
 
 
 def home(request):
-    context = {'posts': Post.objects.all()}
+    context = {'posts': Post.objects.all(),'title': 'Home'}
     return render(request, 'blog/home.html', context)
 
 class PostListView(ListView):

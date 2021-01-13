@@ -20,7 +20,7 @@ def register(request):
     return render(request, 'users/register.html',{'form': form})
 
 def store(request):
-    context = {'products': Product.objects.all()}
+    context = {'products': Product.objects.all(),'title': 'Store'}
     return render(request, 'users/store.html', context)
 
 def Checkout(request):
@@ -43,7 +43,7 @@ def cart(request):
         items = order.orderitem_set.all()
     else:
         items = []
-    context = {'items':items}
+    context = {'items':items,'title': 'Cart'}
     return render(request, 'users/cart.html', context)
 
 def checkout(request):
