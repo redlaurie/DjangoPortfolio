@@ -13,6 +13,7 @@ class Profile(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=250, null=True)
     price = models.FloatField()
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
         return self.name
