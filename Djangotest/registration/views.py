@@ -42,8 +42,9 @@ def cart(request):
         order, created = Order.objects.get_or_create(Profile=customer, complete=False)
         items = order.orderitem_set.all()
     else:
+        order = {'get_cart_total': 0, }
         items = []
-    context = {'items':items,'title': 'Cart'}
+    context = {'items':items,'title': 'Cart','order': order}
     return render(request, 'users/cart.html', context)
 
 def checkout(request):

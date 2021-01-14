@@ -11,6 +11,7 @@ for(var i= 0; i < updateBtns.length; i++){
         }else{
             console.log('logged in')
             updateUserOrder(productId,action)
+            location.reload()
         }
     })
 }
@@ -35,6 +36,7 @@ function updateUserOrder(productId, action){
 
     .then((data) =>{
         console.log('data:',data)
+        location.reload()
     })
 
 }
