@@ -31,7 +31,7 @@ def DetailView(request,pk):
     print(post)
     photos = postImages.objects.filter(post=post)
     print(photos)
-    context = {'post':post,'photos':photos}
+    context = {'post':post,'photos':photos, 'title': post}
     print(context)
     return render(request, 'Blog/post_detail.html',context)
 
