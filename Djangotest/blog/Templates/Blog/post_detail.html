@@ -41,7 +41,7 @@
                 </div>
                     {% if post.author == user %}
                         <a class="btn btn-outline-success" href="{% url 'post-update' post.id %}">Update Post</a>
-                        <a class="btn btn-outline-success" href="#">Delete Post</a>
+                        <a class="btn danger" href="#">Delete Post</a>
                     {% endif %}
           </div>
         </article>
