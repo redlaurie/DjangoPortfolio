@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
@@ -104,6 +104,11 @@ def processOrder(request):
         )
         ShippingAddress.save()
     return JsonResponse('payment recieved', safe=False)
+
+def ProductDetailView(request,pk):
+    item = get_object_or_404(Product,id=pk)
+    context = {'item':item,'title': item}
+    return render(request, 'users/product.html',context)
 
 @login_required()
 def profile(request):

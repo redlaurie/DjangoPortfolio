@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
     path('store/', user_views.store, name='store'),
+    path('store/item/<int:pk>/', user_views.ProductDetailView, name="item-details"),
     path('store/cart', user_views.cart, name='cart'),
     path('store/checkout/', user_views.Checkout, name='checkout'),
     path('process_order/', user_views.processOrder, name='process_order'),
