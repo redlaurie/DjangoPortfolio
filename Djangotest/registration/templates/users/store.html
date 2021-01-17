@@ -1,5 +1,14 @@
 {% extends "blog/base.html" %}
 {% block content %}
+    <form class="get">
+    <div class="input-group">
+        <input name="i" type="text" placeholder="Search" class="form-control form-control-lg">
+        <div class="input-group-append">
+            <button class="btn btn-dark btn-lg">Search</button>
+        </div>
+    </div>
+    </form>
+<main class="container">
     <div class="row">
         {% for product in products %}
             <div class="col-lg-4">
@@ -17,6 +26,6 @@
         {% endfor %}
 
     </div>
-
+</main>
 
 {% endblock content %}

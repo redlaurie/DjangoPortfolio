@@ -6,6 +6,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
+from .filters import ProductFilter
 # Create your views here.
 def register(request):
     if request.method == 'POST':
@@ -20,7 +21,17 @@ def register(request):
     return render(request, 'users/register.html',{'form': form})
 
 def store(request):
-    context = {'products': Product.objects.all(),'title': 'Store'}
+    if 'i' in request.GET:
+        i = request.GET['i']
+        products = Product.objects.filter(name=i)
+        myFilter = ProductFilter(request.GET, queryset=products)
+        products = myFilter.qs
+        context = {'products': products, 'title': 'Store'}
+    else:
+        products = Product.objects.all()
+        myFilter = ProductFilter(request.GET, queryset=products)
+        products = myFilter.qs
+        context = {'products': products,'title': 'Store','myFilter':myFilter}
     return render(request, 'users/store.html', context)
 
 def Checkout(request):
