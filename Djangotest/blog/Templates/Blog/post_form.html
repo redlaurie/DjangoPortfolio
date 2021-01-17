@@ -1,16 +1,23 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <form method="post">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Blog Post</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
+<main class="container">
+        <div class="content-section">
+            <div class="left-col">
+                <form method="post">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Blog Post</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Post</button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+            <div class="right-col">
+                <p class="article-content">If the image field is left blank your profile picture will display instead.</p>
+            </div>
+        </div>
+</main>
 {% endblock content %}
