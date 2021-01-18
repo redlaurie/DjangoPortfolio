@@ -127,6 +127,14 @@ def ProductDetailView(request,pk):
     context = {'item':item,'title': item}
     return render(request, 'users/product.html',context)
 
+def ViewProfile(request,username):
+
+        profile = Profile.objects.filter(name=username)
+        print(profile)
+        context = {'Profiles':profile}
+        return render(request, 'users/user_profile.html',context)
+        #follow querey sets ^^ this will sort it
+
 @login_required()
 def profile(request):
     return render(request, 'users/profile.html')
