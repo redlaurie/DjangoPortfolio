@@ -23,10 +23,16 @@ def register(request):
 def store(request):
     if 'i' in request.GET:
         i = request.GET['i']
-        products = Product.objects.filter(name=i)
-        myFilter = ProductFilter(request.GET, queryset=products)
-        products = myFilter.qs
-        context = {'products': products, 'title': 'Store'}
+        if i != "":
+            products = Product.objects.filter(name=i)
+            myFilter = ProductFilter(request.GET, queryset=products)
+            products = myFilter.qs
+            context = {'products': products, 'title': 'Store'}
+        else:
+            products = Product.objects.all()
+            myFilter = ProductFilter(request.GET, queryset=products)
+            products = myFilter.qs
+            context = {'products': products, 'title': 'Store', 'myFilter': myFilter}
     else:
         products = Product.objects.all()
         myFilter = ProductFilter(request.GET, queryset=products)

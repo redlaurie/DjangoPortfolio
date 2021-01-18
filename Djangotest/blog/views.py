@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView,UpdateView
 from django.http import HttpResponse
 from .models import Post,postImages
-
+from django.contrib.auth.models import User
 # Create your views here.
 # python C:\Users\red-l\Django\Djangotest\manage.py path
 
@@ -17,6 +17,17 @@ class PostListView(ListView):
     template_name = 'blog/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'blog/user_posts.html'
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+
+    def get_query_set(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).ordery_by('-date_posted')
 
 class PostDetailView(DetailView):
     print("this one 1")
