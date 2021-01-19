@@ -6,7 +6,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
-from .filters import ProductFilter
+from .filters import ProductFilter,ProfileFilter
 # Create your views here.
 def register(request):
     if request.method == 'POST':
@@ -128,10 +128,10 @@ def ProductDetailView(request,pk):
     return render(request, 'users/product.html',context)
 
 def ViewProfile(request,username):
-
-        profile = Profile.objects.filter(name=username)
+        profile = Profile.objects.filter(name=username)[0]
         print(profile)
-        context = {'Profiles':profile}
+        context = {'profile':profile}
+        print(context)
         return render(request, 'users/user_profile.html',context)
         #follow querey sets ^^ this will sort it
 
