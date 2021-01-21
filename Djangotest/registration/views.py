@@ -123,8 +123,9 @@ def processOrder(request):
     return JsonResponse('payment recieved', safe=False)
 
 def ProductDetailView(request,pk):
+    products = Product.objects.all()
     item = get_object_or_404(Product,id=pk)
-    context = {'item':item,'title': item}
+    context = {'item':item,'title': item,"products":products,"idforward":pk+1,"idbackwards":pk-1}
     return render(request, 'users/product.html',context)
 
 def ViewProfile(request,username):
