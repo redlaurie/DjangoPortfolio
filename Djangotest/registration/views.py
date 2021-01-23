@@ -7,6 +7,7 @@ from django.http import JsonResponse
 import json
 import datetime
 from .filters import ProductFilter,ProfileFilter
+from django.db.models import Case, Value, When,CharField,ImageField
 # Create your views here.
 def register(request):
     if request.method == 'POST':
@@ -123,9 +124,37 @@ def processOrder(request):
     return JsonResponse('payment recieved', safe=False)
 
 def ProductDetailView(request,pk):
-    products = Product.objects.all()
+
+    products3 = Product.objects.annotate(
+        order=Case(
+            When(id=pk), then=Value('1'),
+            default=Value('0'),
+            output_field=ImageField(),
+        )
+    ).order_by('order')
+    print(products3)
     item = get_object_or_404(Product,id=pk)
-    context = {'item':item,'title': item,"products":products,"idforward":pk+1,"idbackwards":pk-1}
+    if pk == 1:
+            print(Product.objects.count())
+            ProductCount = Product.objects.count()
+            backwardId = pk+ProductCount-1
+            forwardId = pk + 1
+            print(forwardId, backwardId,"pk 0")
+            context = {'item': item, 'title': item, "products": products3, "idforward": forwardId,
+                       "idbackwards": backwardId}
+    elif pk == Product.objects.count():
+            print(Product.objects.count())
+            ProductCount = Product.objects.count()
+            backwardId = pk - 1
+            forwardId = pk - ProductCount+1
+            print(forwardId, backwardId,"pkMax")
+            context = {'item': item, 'title': item, "products": products3, "idforward": forwardId,
+                       "idbackwards": backwardId}
+    else:
+            forwardId = pk+1
+            backwardId = pk-1
+            print(forwardId,backwardId)
+            context = {'item':item,'title': item,"products":products3,"idforward":forwardId,"idbackwards":backwardId}
     return render(request, 'users/product.html',context)
 
 def ViewProfile(request,username):
