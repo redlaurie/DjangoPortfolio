@@ -28,6 +28,7 @@ urlpatterns = [
     path('store/checkout/', user_views.Checkout, name='checkout'),
     path('process_order/', user_views.processOrder, name='process_order'),
     path('update_item/', user_views.updateItem, name='update_item'),
+    path('profile/diary', user_views.diaryrequest, name='diary'),
     path('profile/', user_views.profile, name='profile'),
     path('profile/<str:username>', user_views.ViewProfile, name='profile_user'),
     path('login/', auth_views.LoginView.as_view(template_name = 'users/login.html'), name='login'),

@@ -39,7 +39,7 @@ def store(request):
         myFilter = ProductFilter(request.GET, queryset=products)
         products = myFilter.qs
         context = {'products': products,'title': 'Store','myFilter':myFilter}
-    return render(request, 'users/store.html', context)
+    return render(request, 'store/store.html', context)
 
 def Checkout(request):
     print("checkout")
@@ -51,19 +51,20 @@ def Checkout(request):
         order = {'get_cart_total':0,}
         items = []
     context = {'items': items, 'order': order}
-    return render(request, 'users/checkout.html', context)
+    return render(request, 'store/checkout.html', context)
 
 def cart(request):
-    print("cart")
     if request.user.is_authenticated:
         customer = request.user.profile
         order, created = Order.objects.get_or_create(Profile=customer, complete=False)
+        print(order)
         items = order.orderitem_set.all()
+        print(items)
     else:
         order = {'get_cart_total': 0, }
         items = []
     context = {'items':items,'title': 'Cart','order': order}
-    return render(request, 'users/cart.html', context)
+    return render(request, 'store/cart.html', context)
 
 def checkout(request):
     if request.user.is_authenticated:
@@ -73,7 +74,7 @@ def checkout(request):
     else:
         items = []
     context = {'items':items}
-    return render(request, 'users/cart.html', context)
+    return render(request, 'store/cart.html', context)
 def updateItem(request):
 
     data = json.loads(request.body)
@@ -155,7 +156,7 @@ def ProductDetailView(request,pk):
             backwardId = pk-1
             print(forwardId,backwardId)
             context = {'item':item,'title': item,"products":products3,"idforward":forwardId,"idbackwards":backwardId}
-    return render(request, 'users/product.html',context)
+    return render(request, 'store/product.html',context)
 
 def ViewProfile(request,username):
         profile = Profile.objects.filter(name=username)[0]
@@ -168,3 +169,16 @@ def ViewProfile(request,username):
 @login_required()
 def profile(request):
     return render(request, 'users/profile.html')
+
+def diaryrequest(request):
+    if request.user.is_authenticated:
+        customer = request.user.profile
+        diary, created = Diary.objects.get_or_create(Profile=customer)
+        print(diary)
+        diaryItem = diary.diaryitem_set.all()
+        print(diaryItem)
+    else:
+        diary = {'get_cart_total': 0, }
+        diaryItem = []
+    context = {'diary':diary}
+    return render(request, 'diary/diary.html', context)
