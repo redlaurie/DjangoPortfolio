@@ -82,10 +82,9 @@ class Diary(models.Model):
     name = models.CharField(max_length=24, null=True)
     description = models.TextField(User, default='Hello')
 
-    def __str__(self):
-        return str(self.id)
 
 class DiaryItem(models.Model):
     name = models.CharField(max_length=24, null=True)
     diary = models.ForeignKey(Diary, on_delete=models.SET_NULL, blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    Profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, blank=True, null=True)

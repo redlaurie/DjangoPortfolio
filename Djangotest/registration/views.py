@@ -173,12 +173,13 @@ def profile(request):
 def diaryrequest(request):
     if request.user.is_authenticated:
         customer = request.user.profile
-        diary, created = Diary.objects.get_or_create(Profile=customer)
-        print(diary)
-        diaryItem = diary.diaryitem_set.all()
-        print(diaryItem)
+        diaryItem = Diary.objects.filter(Profile=customer)
+        #diaryItem = diary.diaryitem_set.all()
+        DiaryTasks = DiaryItem.objects.filter(Profile=customer)
+        print(DiaryTasks)
     else:
         diary = {'get_cart_total': 0, }
         diaryItem = []
-    context = {'diary':diary}
+        DiaryTasks = []
+    context = {'diarys':diaryItem,'diaryitems':DiaryTasks}
     return render(request, 'diary/diary.html', context)

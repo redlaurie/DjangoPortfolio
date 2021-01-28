@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "blog/base.html" %}
+{% block content %}
+        {% for diary in diarys %}
+            <div class="col-lg-4">
+            <h6><strong>{{diary.name}}</strong></h6>
+                {% for diaryitem in diaryitems  %}
+                    {% if diaryitem.diary == diary %}
+                        <div class="box-element product">
+                            <h6><strong>{{diaryitem.name}}</strong></h6>
+                            <hr>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+{% endblock content %}
