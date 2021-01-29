@@ -3,6 +3,9 @@
         {% for diary in diarys %}
             <div class="col-lg-4">
             <h6><strong>{{diary.name}}</strong></h6>
+            <a class="btn btn-outline-success" href="{% url 'diaryitem-add' %}">+</a>
+            <hr>
+                <div class="row">
                 {% for diaryitem in diaryitems  %}
                     {% if diaryitem.diary == diary %}
                         <div class="box-element product">
@@ -11,6 +14,12 @@
                         </div>
                     {% endif %}
                 {% endfor %}
+                </div>
             </div>
         {% endfor %}
 {% endblock content %}
+{% block sidebar %}
+    <div>
+        <a class="btn btn-outline-success" href="{% url 'diary-add' %}">+</a>
+    </div>
+{% endblock sidebar %}

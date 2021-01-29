@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm,DiaryAdditionForm
 from .models import *
 from django.http import JsonResponse
 import json
+from django.views.generic import ListView, DetailView, CreateView,UpdateView
 import datetime
 from .filters import ProductFilter,ProfileFilter
 from django.db.models import Case, Value, When,CharField,ImageField
@@ -183,3 +184,22 @@ def diaryrequest(request):
         DiaryTasks = []
     context = {'diarys':diaryItem,'diaryitems':DiaryTasks}
     return render(request, 'diary/diary.html', context)
+
+class DiaryCreateView(CreateView):
+    model = Diary
+
+    fields = ['name','description']
+
+    def form_valid(self, form):
+        form.instance.Profile = self.request.user.profile
+        return super().form_valid(form)
+
+class DiaryItemCreateView(CreateView):
+    model = DiaryItem
+    fields = ['name', 'diary']
+
+    def form_valid(self, form):
+        print(self, "self")
+        form.instance.Profile = self.request.user.profile
+        print(self,"self")
+        return super().form_valid(form)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
+from django.urls import reverse
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -82,9 +83,14 @@ class Diary(models.Model):
     name = models.CharField(max_length=24, null=True)
     description = models.TextField(User, default='Hello')
 
+    def get_absolute_url(self):
+        return reverse('diary')
 
 class DiaryItem(models.Model):
     name = models.CharField(max_length=24, null=True)
     diary = models.ForeignKey(Diary, on_delete=models.SET_NULL, blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     Profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, blank=True, null=True)
+
+    def get_absolute_url(self):
+        return reverse('diary')
