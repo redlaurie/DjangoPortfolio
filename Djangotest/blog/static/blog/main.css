@@ -95,3 +95,19 @@ a.article-title:hover {
   background: #f44336;
   color: white;
 }
+#container {
+    white-space: nowrap;
+    border: 1px solid #f0f;
+    width: 190px;
+    overflow-x: auto
+}
+#container > main {
+    background: #ccc;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+
+    /* for IE6/7, remove if you don't need to support those browsers */
+    *display: inline;
+    zoom: 1
+}

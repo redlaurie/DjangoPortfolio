@@ -1,25 +1,27 @@
 {% extends "blog/base.html" %}
-{% block content %}
+{% block main %}
+<main>
+    <div class="row">
         {% for diary in diarys %}
-            <div class="col-lg-4">
+            <div class="col-lg-3">
             <h6><strong>{{diary.name}}</strong></h6>
             <a class="btn btn-outline-success" href="{% url 'diaryitem-add' %}">+</a>
             <hr>
-                <div class="row">
+                <div class="col">
                 {% for diaryitem in diaryitems  %}
                     {% if diaryitem.diary == diary %}
-                        <div class="box-element product">
+                        <article class="media content-section">
                             <h6><strong>{{diaryitem.name}}</strong></h6>
                             <hr>
-                        </div>
+                        </article>
                     {% endif %}
                 {% endfor %}
                 </div>
             </div>
         {% endfor %}
-{% endblock content %}
-{% block sidebar %}
-    <div>
+        <div>
         <a class="btn btn-outline-success" href="{% url 'diary-add' %}">+</a>
+        </div>
     </div>
-{% endblock sidebar %}
+</main>
+{% endblock main %}
