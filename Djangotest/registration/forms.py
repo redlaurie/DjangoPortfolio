@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import *
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -10,7 +11,13 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username','email','password1','password2']
 
 
-class DiaryAdditionForm(forms.Form):
+class DiaryAdditionForm(forms.ModelForm):
 
-    class meta:
-        fields = ['name','email','password1','password2']
+    class Meta:
+        model = DiaryItem
+        fields = ['name', 'diary']
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(DiaryAdditionForm, self).__init__(*args, **kwargs)
+        self.fields['diary'].queryset = Diary.objects.filter(Profile=user)
