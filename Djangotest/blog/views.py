@@ -49,7 +49,7 @@ def DetailView(request,pk):
 
 class PostCreateView(CreateView):
     model = Post
-    fields = ['title','content','image']
+    fields = ['title','content','image','Template']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
