@@ -1,27 +1,51 @@
 {% extends "blog/base.html" %}
 {% block main %}
+<style>
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #333;
+}
+</style>
 <main>
-    <div class="row">
-        {% for diary in diarys %}
-            <div class="col-lg-3">
-            <h6><strong>{{diary.name}}</strong></h6>
-            <a class="btn btn-outline-success" href="{% url 'diaryitem-add' %}">+</a>
-            <hr>
-                <div class="col">
-                {% for diaryitem in diaryitems  %}
-                    {% if diaryitem.diary == diary %}
-                        <article class="media content-section">
-                            <h6><strong>{{diaryitem.name}}</strong></h6>
-                            <hr>
-                        </article>
-                    {% endif %}
-                {% endfor %}
+        <div class="scrollmenu">
+            <div class="row">
+                {% for diary in diarys %}
+                <div class="col-lg-3">
+                    <h6><strong>{{diary.name}}</strong></h6>
+                    <a class="btn btn-outline-success" href="{% url 'diaryitem-add' %}">+</a>
+                    <hr>
+                     <div class="col">
+                        {% for diaryitem in diaryitems  %}
+                            {% if diaryitem.diary == diary %}
+                                <article class="media content-section">
+                                    <h6><strong>{{diaryitem.name}}</strong></h6>
+                                    <hr>
+                                </article>
+                            {% endif %}
+                        {% endfor %}
+                     </div>
                 </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-        <div>
-        <a class="btn btn-outline-success" href="{% url 'diary-add' %}">+</a>
         </div>
     </div>
 </main>
 {% endblock main %}
+{% block sidebar %}
+<div class="row">
+            <div>
+            <a class="btn btn-outline-success" href="{% url 'diary-add' %}">+</a>
+            </div>
+</div>
+{% endblock sidebar %}

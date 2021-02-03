@@ -38,6 +38,7 @@
         <title>Home</title>
     {% endif %}
 </head>
+    {% block main %}{% endblock %}
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
@@ -68,7 +69,6 @@
         </div>
       </nav>
     </header>
-    {% block main %}{% endblock %}
     <main role="main" class="container">
         <div class="row">
             <div class="col">

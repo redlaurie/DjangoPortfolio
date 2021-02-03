@@ -111,3 +111,8 @@ a.article-title:hover {
     *display: inline;
     zoom: 1
 }
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+}

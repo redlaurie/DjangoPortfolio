@@ -44,7 +44,8 @@ def DetailView(request,pk):
     print(photos)
     context = {'post':post,'photos':photos, 'title': post}
     print(context)
-    return render(request, 'Blog/post_detail.html',context)
+    url = post.Template.templateURLS
+    return render(request, url,context)
 
 class PostCreateView(CreateView):
     model = Post
