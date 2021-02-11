@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm,DiaryAdditionForm
 from .models import *
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse, Http404,HttpResponse
 import json
 from django.views.generic import ListView, DetailView, CreateView,UpdateView
 import datetime
@@ -166,7 +166,9 @@ def ViewProfile(request,username):
         print(context)
         return render(request, 'users/user_profile.html',context)
         #follow querey sets ^^ this will sort it
-
+def pdf_view(request):
+    image_data = open('Djangotest\media\documents\Laurie_Humphries-Cable_CV.pdf', 'rb').read()
+    return HttpResponse(image_data, content_type='application/pdf')
 @login_required()
 def profile(request):
     return render(request, 'users/profile.html')

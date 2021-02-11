@@ -28,6 +28,7 @@ urlpatterns = [
     path('store/checkout/', user_views.Checkout, name='checkout'),
     path('process_order/', user_views.processOrder, name='process_order'),
     path('update_item/', user_views.updateItem, name='update_item'),
+    path('profile/CV', user_views.pdf_view, name='pdf'),
     path('profile/diary', user_views.diaryrequest, name='diary'),
     path('profile/diary/add',user_views.DiaryCreateView.as_view(), name = 'diary-add'),
     path('profile/diary/additem',user_views.DiaryItemCreateView.as_view(), name = 'diaryitem-add'),

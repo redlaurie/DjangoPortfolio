@@ -8,6 +8,7 @@
                 <h2 class="account-heading">{{ user.username }}</h2>
                 <p class="text-secondary">{{ user.email }}</p>
                 <p class="article-content">{{ user.profile.description }}</p>
+                <a class="btn btn-outline-success" href="{% url 'pdf' %}" target="_new"></a>
                 <a class="btn btn-outline-success" href="{% url 'post-create' %}">Add new post</a>
                 <a class="btn btn-outline-success" href="{% url 'diary' %}">Check Diary</a>
             </div>

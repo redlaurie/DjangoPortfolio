@@ -8,7 +8,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=24, null=True)
     image = models.ImageField(default='default.jpg',upload_to='profile_pics')
     description = models.TextField(User,default='Hello')
-
+    CV = models.FileField(upload_to='documents')
     def __str__(self):
         return f'{self.user.username} Profile'
 
