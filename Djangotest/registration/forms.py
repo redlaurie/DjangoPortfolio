@@ -8,7 +8,7 @@ class UserRegisterForm(UserCreationForm):
 
     class meta:
         model = User
-        fields = ['username','email','password1','password2']
+        fields = ['username','email','password1','password2','CV']
 
 
 class DiaryAdditionForm(forms.ModelForm):

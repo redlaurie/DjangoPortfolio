@@ -167,7 +167,10 @@ def ViewProfile(request,username):
         return render(request, 'users/user_profile.html',context)
         #follow querey sets ^^ this will sort it
 def pdf_view(request):
-    image_data = open('Djangotest\media\documents\Laurie_Humphries-Cable_CV.pdf', 'rb').read()
+    print(request.user.profile.CV.url)
+    url = "Djangotest"
+    url = url + request.user.profile.CV.url
+    image_data = open(url, 'rb').read()
     return HttpResponse(image_data, content_type='application/pdf')
 @login_required()
 def profile(request):
