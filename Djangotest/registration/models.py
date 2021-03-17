@@ -9,6 +9,11 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg',upload_to='profile_pics')
     description = models.TextField(User,default='Hello')
     CV = models.FileField(upload_to='documents')
+    level = models.FloatField()
+    strength = models.FloatField()
+    strengthsteps = models.FloatField()
+    dexterity = models.FloatField()
+    dexteritysteps = models.FloatField()
     def __str__(self):
         return f'{self.user.username} Profile'
 

@@ -160,6 +160,7 @@ def ProductDetailView(request,pk):
     return render(request, 'store/product.html',context)
 
 def ViewProfile(request,username):
+        print("trying to view")
         profile = Profile.objects.filter(name=username)[0]
         print(profile)
         context = {'profile':profile}
@@ -175,6 +176,28 @@ def pdf_view(request):
 @login_required()
 def profile(request):
     return render(request, 'users/profile.html')
+
+def uploadstats(request,stat,steps):
+    print("recieved")
+    if request.user.is_authenticated:
+        print("logged in?")
+        user = request.user.profile
+        username = request.user.profile.user
+        if stat == "strength":
+            print("strength")
+            strengthstat = user.strength
+            print(strengthstat)
+            profile = Profile.objects.filter(name=username).values('strength')
+            print(profile)
+            newstrength = profile.update(strength=steps)
+            print(newstrength)
+            return render(request, 'users/profile.html')
+        elif stat == "dexterity":
+            strengthstat = user.dexterity
+            print(strengthstat)
+            return render(request, 'users/profile.html')
+    else:
+        return None
 
 def diaryrequest(request):
     if request.user.is_authenticated:

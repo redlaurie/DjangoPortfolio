@@ -34,6 +34,8 @@ urlpatterns = [
     path('profile/diary/additem',user_views.DiaryItemCreateView.as_view(), name = 'diaryitem-add'),
     path('profile/', user_views.profile, name='profile'),
     path('profile/<str:username>', user_views.ViewProfile, name='profile_user'),
+    path('profile/upload', user_views.uploadstats, name="profile_upload"),
+    path('upload/<str:stat>/<str:steps>', user_views.uploadstats, name="profile_upload"),
     path('login/', auth_views.LoginView.as_view(template_name = 'users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name = 'users/logout.html'), name='logout'),
     path('', include('blog.urls')),
