@@ -10,6 +10,7 @@ class Profile(models.Model):
     description = models.TextField(User,default='Hello')
     CV = models.FileField(upload_to='documents')
     level = models.FloatField()
+    leveldex = models.FloatField()
     strength = models.FloatField()
     strengthsteps = models.FloatField()
     dexterity = models.FloatField()

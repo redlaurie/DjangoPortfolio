@@ -189,14 +189,25 @@ def uploadstats(request,stat,steps):
             print(strengthstat)
             profile = Profile.objects.filter(name=username).values('strength')
             print(profile)
-            newstrength = profile.update(strength=steps)
+            print(Profile.strength)
+            newstrength = profile.update(strength = user.strength + float(steps))
             print(newstrength)
+
             return render(request, 'users/profile.html')
         elif stat == "dexterity":
-            strengthstat = user.dexterity
-            print(strengthstat)
-            return render(request, 'users/profile.html')
+            print("dexterity")
+            dexstat = user.dexterity
+            print(dexstat,steps)
+            profile = Profile.objects.filter(name=username).values('dexterity')
+            print(profile)
+            print(Profile.dexterity)
+            newdex = profile.update(strength=user.dexterity + float(steps))
+
+            print(user.dexterity)
+            context = {'dexterity':{'dex':[newdex]}}
+            return JsonResponse(context)
     else:
+        print("not logged in")
         return None
 
 def diaryrequest(request):
