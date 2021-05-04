@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm,DiaryAdditionForm
 from .models import *
@@ -209,7 +210,31 @@ def uploadstats(request,stat,steps):
     else:
         print("not logged in")
         return None
+@csrf_exempt
+def retrieve(request,stat,username):
+    print("retrieving")
+    if username != "":
+        if stat == "strength":
+            print("strength")
+            profile = Profile.objects.filter(name=username).values('strength')
+            strengthstat = Profile.strength
+            print(strengthstat)
 
+            context = {'strength': {'str': [strengthstat]}}
+            return JsonResponse(context)
+
+        elif stat == "dexterity":
+            print("dexterity")
+            profile = Profile.objects.filter(name=username)[0]
+            dexstat = profile.dexterity
+            print(profile.dexterity,"1")
+
+            print(profile.dexterity,"2")
+            context = {'dexterity': {'dex': [dexstat]}}
+            return JsonResponse(context)
+    else:
+        print("not logged in")
+        return None
 def diaryrequest(request):
     if request.user.is_authenticated:
         customer = request.user.profile
